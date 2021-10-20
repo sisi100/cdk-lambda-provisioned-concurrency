@@ -25,4 +25,6 @@ class CdkLambdaProvisionedConcurrencyStack(cdk.Stack):
         )
 
         # 新しいバージョンからエイリアスを作る
-        hoge_alias = aws_lambda.Alias(self, "HogeAlias", alias_name="hoge-alias", version=hoge_version)
+        aws_lambda.Alias(
+            self, "HogeAlias", alias_name="hoge-alias", version=hoge_version, provisioned_concurrent_executions=1
+        )  # versionに`hoge_lambda.latest_version`を指定した場合はプロビジョニングできない
