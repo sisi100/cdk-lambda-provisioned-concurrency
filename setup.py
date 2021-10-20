@@ -14,7 +14,7 @@ setuptools.setup(
     author="author",
     package_dir={"": "cdk_lambda_provisioned_concurrency"},
     packages=setuptools.find_packages(where="cdk_lambda_provisioned_concurrency"),
-    install_requires=["aws-cdk.core==1.128.0", "aws-cdk.aws-lambda==1.128.0", "aws-cdk.aws_lambda_python==1.128.0",],
+    install_requires=["aws-cdk.core==1.128.0", "aws-cdk.aws-lambda==1.128.0",],
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 4 - Beta",

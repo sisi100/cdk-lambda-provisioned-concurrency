@@ -1,4 +1,4 @@
-from aws_cdk import core as cdk, aws_lambda, aws_applicationautoscaling as appscaling
+from aws_cdk import core as cdk, aws_lambda
 from datetime import datetime
 
 
@@ -26,17 +26,3 @@ class CdkLambdaProvisionedConcurrencyStack(cdk.Stack):
 
         # 新しいバージョンからエイリアスを作る
         hoge_alias = aws_lambda.Alias(self, "HogeAlias", alias_name="hoge-alias", version=hoge_version)
-
-        # エイリアスをオートスケールのターゲットに設定する
-        hoge_scaling = hoge_alias.add_auto_scaling(min_capacity=1, max_capacity=5)
-
-        # ターゲット追跡スケーリングする
-        hoge_scaling.scale_on_utilization(utilization_target=0.5)  # 使用率が50%を付近になるようにする
-
-        # スケジュールでスケーリングする
-        hoge_scaling.scale_on_schedule(
-            "Hoge1Schedule", schedule=appscaling.Schedule.cron(hour="0", minute="0"), max_capacity=5, min_capacity=2
-        )
-        hoge_scaling.scale_on_schedule(
-            "Hoge2Schedule", schedule=appscaling.Schedule.cron(hour="20", minute="0"), max_capacity=1, min_capacity=1
-        )
